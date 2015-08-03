@@ -1,8 +1,9 @@
 # Jenkins-on-Mesos
 
 **Req.:**
-- Mesos (v0.23.0)
-- Mesos-DNS (v0.1.2)
+- Mesos (tested with v0.23.0)
+- Mesos-DNS (tested with v0.1.2)
+- Marathon (tested with v0.9.1)
 
 **Default Mesos-Plugin conf. (see [config.xml](config.xml)):**
 
@@ -24,7 +25,7 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
   "container": { 
     "type": "DOCKER",
     "docker": {
-      "image": "jstabenow/jenkins:latest"
+      "image": "jstabenow/jenkins-mesos:latest"
     },
     "volumes": []
   },

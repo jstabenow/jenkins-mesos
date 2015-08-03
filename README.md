@@ -6,7 +6,7 @@ Tested with [Jenkins v1.623](http://jenkins-ci.org/) + [Mesos-Plugin v.0.8.0](ht
 - Mesos-DNS (tested with v0.1.2)
 - Marathon (tested with v0.9.1)
 
-**Default Mesos-Plugin conf. (see [config.xml](config.xml)):**
+**Default Mesos-Plugin [conf.](config.xml):**
 
 - Mesos native library path: /usr/local/lib/libmesos.so
 - Mesos Master: zk://leader.mesos:2181/mesos
@@ -21,7 +21,7 @@ Tested with [Jenkins v1.623](http://jenkins-ci.org/) + [Mesos-Plugin v.0.8.0](ht
 **Run:**
 ```sh
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
-    leader.mesos:8080/v2/apps -d '{
+  leader.mesos:8080/v2/apps -d '{
   "id": "jenkins",
   "container": { 
     "type": "DOCKER",

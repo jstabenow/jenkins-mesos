@@ -1,4 +1,5 @@
 # Jenkins-on-Mesos
+Tested with [Jenkins v1.623](http://jenkins-ci.org/) + [Mesos-Plugin v.0.8.0](https://github.com/jenkinsci/mesos-plugin)
 
 **Req.:**
 - Mesos (tested with v0.23.0)

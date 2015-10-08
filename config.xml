@@ -16,17 +16,17 @@
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
     <org.jenkinsci.plugins.mesos.MesosCloud plugin="mesos@0.8.0">
-      <name>${JENKINS_MESOS_NAME}</name>
+      <name>##JENKINS_MESOS_NAME##</name>
       <nativeLibraryPath>/usr/local/lib/libmesos.so</nativeLibraryPath>
-      <master>${JENKINS_MESOS_MASTER}</master>
-      <description>${JENKINS_MESOS_DESCRIPTION}</description>
-      <frameworkName>${JENKINS_MESOS_FRAMEWORKNAME}</frameworkName>
-      <slavesUser>${JENKINS_MESOS_SLAVEUSER}</slavesUser>
-      <principal>${JENKINS_MESOS_PRINCIPAL}</principal>
-      <secret>${JENKINS_MESOS_SECRET}</secret>
+      <master>##JENKINS_MESOS_MASTER##</master>
+      <description>##JENKINS_MESOS_DESCRIPTION##</description>
+      <frameworkName>##JENKINS_MESOS_FRAMEWORKNAME##</frameworkName>
+      <slavesUser>##JENKINS_MESOS_SLAVEUSER##</slavesUser>
+      <principal>##JENKINS_MESOS_PRINCIPAL##</principal>
+      <secret>##JENKINS_MESOS_SECRET##</secret>
       <checkpoint>true</checkpoint>
-      <onDemandRegistration>${JENKINS_MESOS_ONDEMANDREGISTRATION}</onDemandRegistration>
-      <jenkinsURL>${JENKINS_MESOS_JENKINSURL}</jenkinsURL>
+      <onDemandRegistration>##JENKINS_MESOS_ONDEMANDREGISTRATION##</onDemandRegistration>
+      <jenkinsURL>##JENKINS_MESOS_JENKINSURL##</jenkinsURL>
       <slaveInfos>
         <org.jenkinsci.plugins.mesos.MesosSlaveInfo>
           <slaveCpus>0.1</slaveCpus>
@@ -39,7 +39,7 @@
           <jvmArgs>-Xms16m -XX:+UseConcMarkSweepGC -Djava.net.preferIPv4Stack=true</jvmArgs>
           <jnlpArgs></jnlpArgs>
           <mode>NORMAL</mode>
-          <labelString>${JENKINS_MESOS_SLAVE_LABEL}</labelString>
+          <labelString>##JENKINS_MESOS_SLAVE_LABEL##</labelString>
         </org.jenkinsci.plugins.mesos.MesosSlaveInfo>
       </slaveInfos>
     </org.jenkinsci.plugins.mesos.MesosCloud>

@@ -63,7 +63,7 @@ docker run -it -p 31205:31205 jstabenow/jenkins-master:latest
 
 **UI-Access:** 
 
-"jenkins.marathon.mesos:31205" or "slaves-hostname:31205"
+"jenkins.marathon.mesos:31205" or "agent-hostname:31205"
 
 **Add your first job:**
 

@@ -1,21 +1,29 @@
 # Jenkins-on-Mesos
-Tested with [Jenkins v1.623](http://jenkins-ci.org/) + [Mesos-Plugin v0.8.0](https://github.com/jenkinsci/mesos-plugin)
+Tested with [Jenkins v1.632](http://jenkins-ci.org/) + [Mesos-Plugin v0.8.0](https://github.com/jenkinsci/mesos-plugin)
 
 **Req.:**
-- Mesos v0.23.0
-- Mesos-DNS (tested with v0.1.2)
+- Mesos (v0.23.0+)
+- Mesos-DNS (v0.1.2+)
 - Marathon (tested with v0.9.1)
 
-**Default Mesos-Plugin [conf.](config.xml):**
+**Default Mesos-Plugin Env. (see [Dockerfile](Dockerfile) and [config.xml](config.xml)):**
 
-- Mesos Master: zk://leader.mesos:2181/mesos
-- Slave username: root
-- Framework Principal: no set!
-- Jenkins URL: http://jenkins.marathon.mesos:31205
-- Label String: mesos
-- Remote FS Root: root
+```sh
+JENKINS_HOME "/var/lib/jenkins"
+JENKINS_LOGFILE "/mnt/mesos/sandbox/jenkins.log"
+JENKINS_MESOS_NAME "MesosCloud"
+JENKINS_MESOS_MASTER "zk://leader.mesos:2181/mesos"
+JENKINS_MESOS_DESCRIPTION "Jenkins Schedule"
+JENKINS_MESOS_FRAMEWORKNAME "Mesos"
+JENKINS_MESOS_SLAVEUSER "root"
+JENKINS_MESOS_PRINCIPAL ""
+JENKINS_MESOS_SECRET ""
+JENKINS_MESOS_ONDEMANDREGISTRATION "false"
+JENKINS_MESOS_JENKINSURL "http://jenkins.marathon.mesos:31205"
+JENKINS_MESOS_SLAVE_LABEL "mesos"
+````
 
-**Run:**
+**Marathon Example:**
 ```sh
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
   leader.mesos:8080/v2/apps -d '{
@@ -42,11 +50,15 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
             "maxConsecutiveFailures": 3
         }
   ],
-  "cmd": "java -jar /usr/share/jenkins/jenkins.war --httpPort=$PORT0 --logfile=/mnt/mesos/sandbox/jenkins.log",
   "upgradeStrategy": {
     "minimumHealthCapacity": 0
   }
 }'
+```
+
+**Docker-Run Example:**
+```sh
+docker run -it -p 31205:31205 jstabenow/jenkins-master:latest
 ```
 
 **UI-Access:** 

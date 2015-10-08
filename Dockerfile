@@ -11,7 +11,7 @@ RUN apt-get update && \
     mkdir -p /var/lib/jenkins/plugins && \
     (cd /var/lib/jenkins/plugins && wget --no-check-certificate http://updates.jenkins-ci.org/latest/mesos.hpi)
 
-ADD config.xml /var/lib/jenkins/config.xml
+ADD config.xml /config.xml
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
     DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]') && \
@@ -24,6 +24,23 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
 RUN mkdir /mnt/mesos && \
     mkdir /mnt/mesos/sandbox
 
-ENV JENKINS_HOME /var/lib/jenkins
+ENV JENKINS_HOME "/var/lib/jenkins"
+ENV JENKINS_LOGFILE "/mnt/mesos/sandbox/jenkins.log"
+ENV JENKINS_MESOS_NAME "MesosCloud"
+ENV JENKINS_MESOS_MASTER "zk://leader.mesos:2181/mesos"
+ENV JENKINS_MESOS_DESCRIPTION "Jenkins Schedule"
+ENV JENKINS_MESOS_FRAMEWORKNAME "Mesos"
+ENV JENKINS_MESOS_SLAVEUSER "root"
+ENV JENKINS_MESOS_PRINCIPAL ""
+ENV JENKINS_MESOS_SECRET ""
+ENV JENKINS_MESOS_ONDEMANDREGISTRATION "false"
+ENV JENKINS_MESOS_JENKINSURL "http://jenkins.marathon.mesos:31205"
+ENV JENKINS_MESOS_SLAVE_LABEL "mesos"
+ENV PORT0 31205
 
 VOLUME /var/lib/jenkins
+
+ADD run.sh /bin/run.sh
+RUN chmod +x /bin/run.sh
+
+CMD ["run.sh"]

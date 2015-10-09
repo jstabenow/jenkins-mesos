@@ -21,7 +21,7 @@ JENKINS_MESOS_SECRET ""
 JENKINS_MESOS_ONDEMANDREGISTRATION "false"
 JENKINS_MESOS_JENKINSURL "http://jenkins.marathon.mesos:31205"
 JENKINS_MESOS_SLAVE_LABEL "mesos"
-````
+```
 
 **Marathon Example:**
 ```sh

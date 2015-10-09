@@ -75,7 +75,7 @@ docker run -it -p 31205:31205 jstabenow/jenkins-master:latest
 
 If you want to move the installed Mesos-Plugin into a new Path/Store:
 
-1. Init the App with:
+Init the App with:
 
 ```sh
 {
@@ -98,7 +98,7 @@ If you want to move the installed Mesos-Plugin into a new Path/Store:
     }
 }
 ```
-2. and then:
+And then PUT:
 ```sh
 {
     "container": {

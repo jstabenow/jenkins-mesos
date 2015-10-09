@@ -27,19 +27,21 @@ JENKINS_MESOS_SLAVE_LABEL "mesos"
 ```sh
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
   leader.mesos:8080/v2/apps -d '{
-  "id": "jenkins",
-  "container": { 
-    "type": "DOCKER",
-    "docker": {
-      "image": "jstabenow/jenkins-mesos:latest"
+    "id": "jenkins",
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "jstabenow/jenkins-mesos:latest"
+        },
+        "volumes": []
     },
-    "volumes": []
-  },
-  "cpus": 1,
-  "mem": 2048,
-  "instances": 1,
-  "ports": [31205],
-  "healthChecks": [
+    "cpus": 1,
+    "mem": 2048,
+    "instances": 1,
+    "ports": [
+        31205
+    ],
+    "healthChecks": [
         {
             "path": "/",
             "portIndex": 0,
@@ -49,11 +51,11 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
             "timeoutSeconds": 30,
             "maxConsecutiveFailures": 3
         }
-  ],
-  "upgradeStrategy": {
-    "minimumHealthCapacity": 0
-  }
-}'
+    ],
+    "upgradeStrategy": {
+        "minimumHealthCapacity": 0
+    }
+}`
 ```
 
 **Docker-Run Example:**
@@ -68,3 +70,53 @@ docker run -it -p 31205:31205 jstabenow/jenkins-master:latest
 **Add your first job:**
 
 ![TestJob](test-job.gif)
+
+**Init persistent data:**
+
+If you want to move the installed Mesos-Plugin into a new Path/Store:
+
+1. Init the App with:
+
+```sh
+{
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "jstabenow/jenkins-mesos:latest"
+        },
+        "volumes": [
+            {
+                "containerPath": "/mnt/jenkins",
+                "hostPath": "/mnt/jenkins",
+                "mode": "RW"
+            }
+        ]
+    },
+    "env": {
+        "JENKINS_HOME_NEW": "/mnt/jenkins",
+        "RUN": "MOVE"
+    }
+}
+```
+2. and then:
+```sh
+{
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "jstabenow/jenkins-mesos:latest"
+        },
+        "volumes": [
+            {
+                "containerPath": "/var/lib/jenkins",
+                "hostPath": "/mnt/jenkins",
+                "mode": "RW"
+            }
+        ]
+    },
+    "env": {
+        "RUN": ""
+    }
+}
+```
+Finished.

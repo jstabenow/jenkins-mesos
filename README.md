@@ -1,10 +1,12 @@
 # Jenkins-on-Mesos
-Tested with [Jenkins v1.632](http://jenkins-ci.org/) + [Mesos-Plugin v0.8.0](https://github.com/jenkinsci/mesos-plugin)
 
-**Req.:**
-- Mesos (v0.23.0+)
-- Mesos-DNS (v0.1.2+)
-- Marathon (tested with v0.9.1)
+Last integration test:
+
+- [Jenkins v1.645](http://jenkins-ci.org/)
+- [Mesos-Plugin v0.9.0](https://github.com/jenkinsci/mesos-plugin)
+- Mesos (v0.26.0)
+- Mesos-DNS (v0.5.1)
+- Marathon (tested with v0.10.1)
 
 **Default Mesos-Plugin Env. (see [Dockerfile](Dockerfile) and [config.xml](config.xml)):**
 

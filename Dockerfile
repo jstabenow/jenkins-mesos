@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+ENV MESOS_VERSION 0.26.0-0.2.145
+
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN apt-get update && \
@@ -14,11 +16,9 @@ RUN apt-get update && \
 ADD config.xml /config.xml
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
-    DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]') && \
-    CODENAME=$(lsb_release -cs) && \
-    echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | tee /etc/apt/sources.list.d/mesosphere.list && \
-    apt-get -y update && \
-    apt-get install -y mesos && \
+    echo deb http://repos.mesosphere.io/ubuntu trusty main > /etc/apt/sources.list.d/mesosphere.list && \
+    apt-get update && \
+    apt-get -y install mesos=${MESOS_VERSION}.ubuntu1404 && \
     locale-gen en_US.UTF-8
 
 RUN mkdir /mnt/mesos && \

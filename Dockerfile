@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-ENV MESOS_VERSION 0.26.0-0.2.145
+ENV MESOS_VERSION 0.28.1-2.0.20
 
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
